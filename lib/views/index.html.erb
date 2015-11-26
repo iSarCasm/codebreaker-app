@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WEB page</title>
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+  </head>
+  <body>
+    <section class="leaderboards">
+      <h2>Leaderboards</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Place</th>
+            <th>Nickname</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% leaderboards.each do |x| %>
+            <tr>
+              <td><%= x[0] %></td>
+              <td><%= x[1] %></td>
+              <td><%= x[2] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </section>
+
+    <section class="play">
+      <h2>Play a Game</h2>
+      <p>Select difficulty:</p>
+      <form action="/start_game">
+        <label for="diff">easy, medium, hard, very_hard, mlg, gosu</label>
+        <input id="diff" name="diff" type="text" placeholder="difficulty">
+        <button type="submit">Play</button>
+      </form>
+    </section>
+  </body>
+</html>

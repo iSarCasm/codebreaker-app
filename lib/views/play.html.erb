@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WEB page</title>
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+  </head>
+  <body>
+    <section class="info">
+      <p>Difficulty: <%= game.settings %></p>
+      <p>Attempts: <%= game.max_attempts %></p>
+      <p>Symbols count: <%= game.symbols_count %></p>
+      <p>Symbols range: <%= game.symbols_range %></p>
+      <p>Hints: <%= game.hints_left %></p>
+    </section>
+
+    <section class="state">
+      <p>Attempts left: <%= game.attempts %></p>
+      <p>Hints left: <%= game.hints_left %></p>
+    </section>
+
+    <section class="guessing">
+      <form action="/guess">
+        <input type="text" name="code" id="code" placeholder='<%= "#{game.symbols_range.to_s(16)}"*game.symbols_count %>'>
+        <button type="submit">Submit</button>
+        <a href="/hint">Hint!</a>
+      </form>
+      <div class="response">
+        <% if respond %>
+          <p>Response: <%= '+' * respond[0] + '-' * respond[1] %></p>
+        <% end %>
+      </div>
+      <div class="hint">
+        <% if hint %>
+          <p>Hint: <%= hint.map!{|x| x ? x : '*'} %></p>
+        <% end %>
+      </div>
+    </section>
+  </body>
+</html>

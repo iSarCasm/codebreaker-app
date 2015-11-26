@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WEB page</title>
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+  </head>
+  <body>
+    <section class="result">
+      <% if game.won? %>
+        <div class="won">
+          <h3>Victory!</h3>
+          <p class="score">Your score: <%= game.score %></p>
+          <p class="place">You actually took <span class="bold"><%= place %></span> place in leaderboards</p>
+          <form action="/record">
+            <label for="name">Nickname: </label>
+            <input type="text" id="name" name="name">
+            <button type="submit">Submit</button>
+            <a href="/">Skip</a>
+          </form>
+        </div>
+      <% elsif game.lost? %>
+      <div class="lost">
+        <h3>Defeat!</h3>
+        <a href="/">Go Home..</a>
+      <% end %>
+    </section>
+  </body>
+</html>
