@@ -3,6 +3,7 @@ GEM
   specs:
     diff-lcs (1.2.5)
     rack (1.6.4)
+    rake (10.4.2)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -23,6 +24,7 @@ PLATFORMS
 
 DEPENDENCIES
   rack
+  rake
   rspec
   sarcasm-codebreaker
 
