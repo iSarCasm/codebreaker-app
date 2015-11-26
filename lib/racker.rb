@@ -100,9 +100,11 @@ class Racker
   end
 
   def place
-    table = leaderboards.reverse
+    table = leaderboards
     place = 1
-    table.each_index do |x|
+    p table
+    table.each do |x|
+      puts "==#{x[2]}"
       if game.score > x[2]
         break
       else
