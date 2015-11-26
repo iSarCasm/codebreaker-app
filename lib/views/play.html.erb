@@ -31,7 +31,7 @@
       </div>
       <div class="hint">
         <% if hint %>
-          <p>Hint: <%= hint.map!{|x| x ? x : '*'} %></p>
+          <p>Hint: <%= hint.map!{|x| x || '*'} %></p>
         <% end %>
       </div>
     </section>
