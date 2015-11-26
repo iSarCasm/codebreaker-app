@@ -100,6 +100,15 @@ class Racker
   end
 
   def place
-    4
+    table = leaderboards
+    place = 1
+    table.each_index do |x|
+      if game.score > x[2]
+        break
+      else
+        place += 1
+      end
+    end
+    place
   end
 end
