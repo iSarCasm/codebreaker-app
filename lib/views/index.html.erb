@@ -27,22 +27,46 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
-            <h2>Play a Game</h2>
-            <p>Select difficulty:</p>
-            <form action="/start_game">
-              <div class="form-group">
-                <select name="diff" class="form-control">
-                  <option value="easy">Easy</option>
-                  <option value="medium">Medium</option>
-                  <option value="hard">Hard</option>
-                  <option value="very_hard">Very Hard</option>
-                  <option value="mlg">MLG</option>
-                  <option value="gosu">GOSU</option>
-                </select>
-                <br>
-                <button type="submit" class="btn btn-primary">Play</button>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Play a Game</h3>
               </div>
-            </form>
+              <div class="panel-body">
+                <p>Select difficulty:</p>
+                <form action="/start_game">
+                  <div class="form-group">
+                    <select name="diff" class="form-control">
+                      <option value="easy">Easy</option>
+                      <option value="medium">Medium</option>
+                      <option value="hard">Hard</option>
+                      <option value="very_hard">Very Hard</option>
+                      <option value="mlg">MLG</option>
+                      <option value="gosu">GOSU</option>
+                    </select>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Play</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Introducing Codebreaker</h3>
+              </div>
+              <div class="panel-body">
+                <p>
+  Codebreaker is a logic game in which a code-breaker tries to break a secret code created by a code-maker. The code-maker creates a secret code of four numbers between 1 and 6.
+  <br><br>
+  The code-breaker then gets some number of chances to break the code. In each turn, the code-breaker makes a guess of four numbers. The code-maker then marks the guess with up to four + and - signs.
+  <br><br>
+  A + indicates an exact match: one of the numbers in the guess is the same as one of the numbers in the secret code and in the same position.
+  <br><br>
+  A - indicates a number match: one of the numbers in the guess is the same as one of the numbers in the secret code but in a different position.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
