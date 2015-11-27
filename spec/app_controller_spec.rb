@@ -1,4 +1,4 @@
-require_relative '/lib/racker'
+require_relative '../lib/racker'
 
 describe Racker do
   
