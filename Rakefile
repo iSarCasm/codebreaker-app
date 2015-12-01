@@ -1,6 +1,8 @@
 require 'yaml'
 require_relative 'db/seed'
 
+task :default => :spec
+
 namespace :db do
   task :setup do
     Rake::Task['db:create'].invoke
