@@ -29,12 +29,8 @@ class Racker
         @request.session[:error] = "You have to input #{game.symbols_count} chars."
       rescue ArgumentError => e
         @request.session[:error] = "You have to input chars in range 1-#{game.symbols_range.to_s(16)}"
-      ensure
-        response.redirect("/play")
       end
-      if game.state == :playing
-        response.redirect("/play")
-      else
+      unless game.state == :playing
         response.redirect("/result")
       end
     end
