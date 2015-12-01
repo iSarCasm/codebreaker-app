@@ -8,7 +8,7 @@ class Racker
       clear_session
       clear_cookies(response)
       @request.session[:game] = Codebreaker::Game.new
-      game.start(@request.params["diff"].to_sym)
+      @request.session[:game].start(@request.params["diff"].to_sym)
       response.redirect("/play")
     end
   end
@@ -22,7 +22,7 @@ class Racker
       code = @request.params["code"].split("").map{|x| x.to_i(16)}
       begin
         @request.session[:respond] = game.guess(code)
-        add_play_history(response, [game.attempts_taken, @request.params["code"], formated_respond])
+        add_play_cookie(response, [game.attempts_taken, @request.params["code"], formated_respond])
       rescue IndexError => e
         @request.session[:error] = "You have to input #{game.symbols_count} chars"
         response.redirect("/play")
@@ -39,7 +39,7 @@ class Racker
     Rack::Response.new do |response|
       begin
         @request.session[:hint] = game.hint
-        add_play_history(response, ['HINT', 'HINT', formated_hint])
+        add_play_cookie(response, ['HINT', 'HINT', formated_hint])
         response.redirect("/play")
       rescue Exception => e
         @request.session[:error] = e.message
@@ -54,8 +54,7 @@ class Racker
 
   def save_record
     Rack::Response.new do |response|
-      path = File.expand_path("../../db/records.yml", __FILE__)
-      db = File.open(path,'a+')
+      db = File.open(DB_PATH,'a+')
       loaded = [@request.params["name"], game.score]
       db.write(loaded.to_yaml)
       db.close

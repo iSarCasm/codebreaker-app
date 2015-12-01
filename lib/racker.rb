@@ -1,20 +1,23 @@
-require "erb"
-require "codebreaker"
-require 'yaml'
-
-require_relative "app_helper"
-require_relative "app_controller"
+require           'rack'
+require           'erb'
+require           'codebreaker'
+require           'yaml'
+require_relative  'app_helper'
+require_relative  'app_controller'
 
 class Racker
+  DB_PATH = "db/records.yml"
+  PLAY_COOKIE = "play_story"
+
   def self.call(env)
-    new(env).response.finish
+    new(env).route.finish
   end
 
   def initialize(env)
     @request = Rack::Request.new(env)
   end
 
-  def response
+  def route
     case @request.path
     when "/"            then index_page
     when "/start_game"  then start_game
@@ -37,17 +40,17 @@ class Racker
   end
 
   def clear_cookies(response)
-    response.delete_cookie("play_story")
+    response.delete_cookie(PLAY_COOKIE)
   end
 
-  def add_play_history(response, add)
-    if @request.cookies["play_story"]
-      history = YAML.load(@request.cookies["play_story"])
+  def add_play_cookie(response, add)
+    if @request.cookies[PLAY_COOKIE]
+      history = YAML.load(@request.cookies[PLAY_COOKIE])
       history << add
     else
       history = [add]
     end
     history = YAML.dump(history)
-    response.set_cookie("play_story", history)
+    response.set_cookie(PLAY_COOKIE, history)
   end
 end

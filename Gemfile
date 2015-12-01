@@ -5,5 +5,5 @@ ruby "2.2.2"
 gem 'rake'
 gem 'sarcasm-codebreaker'
 gem 'rack'
+gem "rack-test", require: "rack/test"
 gem 'rspec'
-# gem "rails"

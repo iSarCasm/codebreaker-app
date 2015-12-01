@@ -95,8 +95,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% if play_history %>
-                    <% play_history.reverse.each.with_index do |x, i| %>
+                  <% if play_cookies %>
+                    <% play_cookies.reverse.each.with_index do |x, i| %>
                       <% if i.zero? %>
                         <tr>
                           <td><strong><%= x[0] %>.</strong></td>

@@ -1,5 +1,5 @@
 class Racker
-  def play_history
+  def play_cookies
     YAML.load(@request.cookies["play_story"]) if @request.cookies["play_story"]
   end
 
@@ -20,7 +20,7 @@ class Racker
   end
 
   def formated_respond
-    ' + ' * respond[0] + ' - ' * respond[1]
+    '+ ' * respond[0] + '- ' * respond[1]
   end
 
   def formated_hint
@@ -28,8 +28,7 @@ class Racker
   end
 
   def leaderboards
-    path = File.expand_path("../../db/records.yml", __FILE__)
-    db = File.open(path)
+    db = File.open(DB_PATH)
     loaded = YAML.load_stream(db)
     loaded.sort! do |x1, x2|
       x2[1] <=> x1[1]
@@ -43,7 +42,6 @@ class Racker
   def place
     table = leaderboards
     place = 1
-    p table
     table.each do |x|
       if game.score > x[2]
         break
