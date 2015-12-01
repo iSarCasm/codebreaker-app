@@ -5,8 +5,8 @@ class Racker
 
   def start_game
     Rack::Response.new do |response|
-      clear_session
-      clear_cookies(response)
+      @request.session.clear
+      clear_game_cookies(response)
       @request.session[:game] = Codebreaker::Game.new
       @request.session[:game].start(@request.params["diff"].to_sym)
       response.redirect("/play")
@@ -14,7 +14,9 @@ class Racker
   end
 
   def play_page
-    Rack::Response.new(render("play.html.erb"))
+    response = Rack::Response.new(render("play.html.erb"))
+    @request.session[:error] = nil
+    response
   end
 
   def guess
@@ -24,7 +26,10 @@ class Racker
         @request.session[:respond] = game.guess(code)
         add_play_cookie(response, [game.attempts_taken, @request.params["code"], formated_respond])
       rescue IndexError => e
-        @request.session[:error] = "You have to input #{game.symbols_count} chars"
+        @request.session[:error] = "You have to input #{game.symbols_count} chars."
+      rescue ArgumentError => e
+        @request.session[:error] = "You have to input chars in range 1-#{game.symbols_range.to_s(16)}"
+      ensure
         response.redirect("/play")
       end
       if game.state == :playing

@@ -35,11 +35,7 @@ class Racker
     ERB.new(File.read(path)).result(binding)
   end
 
-  def clear_session
-    @request.session.clear
-  end
-
-  def clear_cookies(response)
+  def clear_game_cookies(response)
     response.delete_cookie(PLAY_COOKIE)
   end
 

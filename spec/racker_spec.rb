@@ -4,6 +4,14 @@ describe Racker do
   include Rack::Test::Methods
   let(:app) { Racker.new TEST_ENV }
 
+  describe '#clear_game_cookies' do
+    it 'clears PLAY_COOKIE' do
+      response = double("response")
+      expect(response).to receive(:delete_cookie).with(Racker::PLAY_COOKIE)
+      app.clear_game_cookies(response)
+    end
+  end
+
   describe '#add_play_cookie' do
     it 'YAML dumps the data before save' do
       expect(YAML).to receive(:dump)

@@ -19,12 +19,13 @@ describe Racker do
     end
 
     it 'clears session' do
-        expect(app).to receive(:clear_session)
+        expect(app.instance_variable_get(:@request).session)
+          .to receive(:clear)
         app.start_game
     end
 
-    it 'clears cookies' do
-        expect(app).to receive(:clear_cookies)
+    it 'clears game cookies' do
+        expect(app).to receive(:clear_game_cookies)
         app.start_game
     end
 
