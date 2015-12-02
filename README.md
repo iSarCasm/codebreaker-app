@@ -3,7 +3,7 @@
 
 ## Setup
 ```ruby
-bundle setup
+bundle install
 rake db:create
 ```
 
