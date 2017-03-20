@@ -8,10 +8,4 @@ rake db:create
 ```
 
 ## Start
-```
-rackup
-```
-Or
-```
-unicorn
-```
+`rackup` or `unicorn`
