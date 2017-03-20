@@ -7,11 +7,11 @@ require_relative  'app_helper'
 require_relative  'app_controller'
 
 class Racker
-  include RackerHelper
-  include RackerController
-
   DB_PATH = "db/records.yml"
   PLAY_COOKIE = "play_story"
+
+  include RackerHelper
+  include RackerController
 
   def self.call(env)
     new(env).route.finish

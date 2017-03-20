@@ -1,4 +1,6 @@
-class RackerHelper
+module RackerHelper
+  DB_PATH = "db/records.yml"
+  PLAY_COOKIE = "play_story"
   def play_cookies
     YAML.load(@request.cookies["play_story"]) if @request.cookies["play_story"]
   end

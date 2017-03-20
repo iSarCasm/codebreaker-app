@@ -1,4 +1,6 @@
-class RackerController
+module RackerController
+  DB_PATH = "db/records.yml"
+  PLAY_COOKIE = "play_story"
   def index_page
     Rack::Response.new(render("index.html.erb"))
   end
