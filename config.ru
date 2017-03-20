@@ -1,4 +1,5 @@
 require "./lib/racker"
+require "byebug"
 use Rack::Session::Cookie, :key => 'rack.session',
                            :path => '/',
                            :expire_after => 2592000,

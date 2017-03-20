@@ -1,4 +1,4 @@
-class Racker
+class RackerController
   def index_page
     Rack::Response.new(render("index.html.erb"))
   end
@@ -14,9 +14,8 @@ class Racker
   end
 
   def play_page
-    response = Rack::Response.new(render("play.html.erb"))
     @request.session[:error] = nil
-    response
+    Rack::Response.new(render("play.html.erb"))
   end
 
   def guess
@@ -30,12 +29,11 @@ class Racker
       rescue ArgumentError => e
         @request.session[:error] = "You have to input chars in range 1-#{game.symbols_range.to_s(16)}"
       ensure
-        response.redirect("/play")
-      end
-      if game.state == :playing
-        response.redirect("/play")
-      else
-        response.redirect("/result")
+        if game.state == :playing
+          response.redirect("/play")
+        else
+          response.redirect("/result")
+        end
       end
     end
   end
@@ -45,9 +43,9 @@ class Racker
       begin
         @request.session[:hint] = game.hint
         add_play_cookie(response, ['HINT', 'HINT', formated_hint])
-        response.redirect("/play")
       rescue Exception => e
         @request.session[:error] = e.message
+      ensure
         response.redirect("/play")
       end
     end
@@ -59,7 +57,7 @@ class Racker
 
   def save_record
     Rack::Response.new do |response|
-      db = File.open(DB_PATH,'a+')
+      db = File.open(DB_PATH, 'a+')
       loaded = [@request.params["name"], game.score]
       db.write(loaded.to_yaml)
       db.close

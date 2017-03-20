@@ -1,4 +1,4 @@
-class Racker
+class RackerHelper
   def play_cookies
     YAML.load(@request.cookies["play_story"]) if @request.cookies["play_story"]
   end
