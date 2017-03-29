@@ -9,6 +9,7 @@ gem 'rake'
 
 # Test
 gem 'capybara'
+gem 'selenium-webdriver', '2.53.4'
 gem 'pry'
 gem 'byebug'
 gem 'rspec'

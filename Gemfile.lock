@@ -11,6 +11,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    childprocess (0.6.3)
+      ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.0)
     diff-lcs (1.2.5)
     ffi (1.9.10)
@@ -69,10 +71,16 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    rubyzip (1.2.1)
     sarcasm-codebreaker (0.2.8)
+    selenium-webdriver (2.53.4)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     shellany (0.0.1)
     slop (3.6.0)
     thor (0.19.1)
+    websocket (1.2.4)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -89,6 +97,7 @@ DEPENDENCIES
   rake
   rspec
   sarcasm-codebreaker
+  selenium-webdriver (= 2.53.4)
 
 BUNDLED WITH
    1.10.6

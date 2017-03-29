@@ -2,6 +2,7 @@ require           'rack'
 require           'erb'
 require           'codebreaker'
 require           'yaml'
+require 'pry'
 
 require_relative  'app_helper'
 require_relative  'app_controller'
