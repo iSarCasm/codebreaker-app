@@ -8,6 +8,8 @@ gem 'sarcasm-codebreaker'
 gem 'rake'
 
 # Test
+gem 'capybara'
+gem 'pry'
 gem 'byebug'
 gem 'rspec'
 gem 'guard-rspec', require: false

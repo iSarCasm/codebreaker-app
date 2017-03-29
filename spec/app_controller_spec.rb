@@ -87,7 +87,7 @@ describe Racker do
         .to receive(:params).and_return({"name"=>"plair"})
     end
 
-    it 'adds new record to DB' do
+    xit 'adds new record to DB' do
       expect{app.save_record}.to change{File.open(Racker::DB_PATH).read}
     end
 
