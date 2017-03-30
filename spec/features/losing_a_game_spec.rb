@@ -18,4 +18,8 @@ RSpec.describe 'losing a game', type: :feature, js: true do
   it 'indicates that player has lost' do
     expect(page).to have_content('Defeat!')
   end
+
+  it 'shows Go Home link' do
+    expect(page).to have_link('Go Home..')
+  end
 end
