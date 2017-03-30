@@ -1,6 +1,10 @@
 module CodebreakerPageDSL
-  def state
+  def get_state
     page.first('.state').text
+  end
+
+  def get_leaderboards
+    page.first('.leaderboards').text
   end
 
   def hints_left
