@@ -3,7 +3,7 @@ require 'rack/test'
 require 'capybara/rspec'
 require 'pry'
 
-require_relative 'fixtures/codebreaker_page_tags'
+require_relative 'fixtures/codebreaker_page_dsl'
 
 ENV['RACK_ENV'] = 'test'
 TEST_ENV = Hash.new

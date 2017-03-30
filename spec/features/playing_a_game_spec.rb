@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe 'playing a game', type: :feature, js: true do
-  include CodebreakerPageTags
+  include CodebreakerPageDSL
 
   before do
     visit 'localhost:9292/'
@@ -12,13 +12,13 @@ RSpec.describe 'playing a game', type: :feature, js: true do
   describe 'submitting a guess' do
    context 'when guess is empty' do
      it "doesn't count as an attempt" do
-       expect {click_button 'Submit' }.to_not change{ page_play_attempts_left }
+       expect {click_button 'Submit' }.to_not change{ attempts_left }
      end
    end
 
    context 'when guess is using wrong chars' do
      it "doesn't count as an attempt" do
-       expect{ click_button 'Submit' }.to_not change{ page_play_attempts_left }
+       expect{ click_button 'Submit' }.to_not change{ attempts_left }
      end
    end
 
@@ -28,7 +28,7 @@ RSpec.describe 'playing a game', type: :feature, js: true do
      end
 
      it "uses an attempt" do
-       expect{ click_button 'Submit' }.to change{ page_play_attempts_left }.by(-1)
+       expect{ click_button 'Submit' }.to change{ attempts_left }.by(-1)
      end
    end
   end
@@ -36,7 +36,7 @@ RSpec.describe 'playing a game', type: :feature, js: true do
   describe 'requesting a hint' do
     context 'when some hints available' do
       it 'returns a hint response and uses 1 hint' do
-        expect{ click_link 'Hint!' }.to change{ page_play_hints_left }.by(-1)
+        expect{ click_link 'Hint!' }.to change{ hints_left }.by(-1)
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe 'playing a game', type: :feature, js: true do
       end
 
       it "doesn't use a hint" do
-        expect{ click_link 'Hint!' }.to_not change{ page_play_hints_left }
+        expect{ click_link 'Hint!' }.to_not change{ hints_left }
       end
     end
   end

@@ -98,9 +98,15 @@
                     <% play_cookies.reverse.each.with_index do |x, i| %>
                       <% if i.zero? %>
                         <tr>
-                          <td><strong><%= x[0] %>.</strong></td>
-                          <td><strong><%= x[1] %></strong></td>
-                          <td><strong><%= x[2] %></strong></td>
+                          <td id="last_attempt">
+                            <strong> <%= x[0] %>. </strong>
+                          </td>
+                          <td id="last_code">
+                            <strong> <%= x[1] %> </strong>
+                          </td>
+                          <td id="last_response">
+                            <strong> <%= x[2] %> </strong>
+                          </td>
                         </tr>
                       <% else %>
                       <tr>
