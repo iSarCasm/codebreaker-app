@@ -3,18 +3,21 @@ class ApplicationController < Controller::Base
   PLAY_COOKIE = "play_story"
 
   def clear_game_cookies(response)
-    response.delete_cookie(PLAY_COOKIE)
+    request.session[PLAY_COOKIE] = nil
   end
 
   def add_play_cookie(response, add)
-    if @request.cookies[PLAY_COOKIE]
-      history = YAML.load(@request.cookies[PLAY_COOKIE])
+    if @request.session[PLAY_COOKIE]
+      history = request.session[PLAY_COOKIE]
       history << add
     else
       history = [add]
     end
-    history = YAML.dump(history)
-    response.set_cookie(PLAY_COOKIE, history)
+    request.session[PLAY_COOKIE] = history
+  end
+
+  def play_cookies
+    request.session[PLAY_COOKIE] if request.session[PLAY_COOKIE]
   end
 
   def leaderboards

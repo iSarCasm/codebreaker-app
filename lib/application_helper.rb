@@ -1,8 +1,4 @@
 module ApplicationHelper
-  def play_cookies
-    YAML.load(@request.cookies["play_story"]) if @request.cookies["play_story"]
-  end
-
   def game
     @request.session[:game]
   end
