@@ -1,6 +1,13 @@
-module RackerController
+class ApplicationController
+  include ApplicationHelper
+
   DB_PATH = "db/records.yml"
   PLAY_COOKIE = "play_story"
+
+  def initialize(request)
+    @request = request
+  end
+
   def index_page
     Rack::Response.new(render("index.html.erb"))
   end

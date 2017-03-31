@@ -1,4 +1,4 @@
-module RackerHelper
+module ApplicationHelper
   DB_PATH = "db/records.yml"
   PLAY_COOKIE = "play_story"
   def play_cookies
@@ -52,5 +52,25 @@ module RackerHelper
       end
     end
     place
+  end
+
+  def render(template)
+    path = File.expand_path("../views/#{template}", __FILE__)
+    ERB.new(File.read(path)).result(binding)
+  end
+
+  def clear_game_cookies(response)
+    response.delete_cookie(PLAY_COOKIE)
+  end
+
+  def add_play_cookie(response, add)
+    if @request.cookies[PLAY_COOKIE]
+      history = YAML.load(@request.cookies[PLAY_COOKIE])
+      history << add
+    else
+      history = [add]
+    end
+    history = YAML.dump(history)
+    response.set_cookie(PLAY_COOKIE, history)
   end
 end
