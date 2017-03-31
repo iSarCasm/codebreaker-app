@@ -7,23 +7,17 @@ require 'pry'
 require_relative  'application_helper'
 require_relative  'application_controller'
 
-class Application
-  DB_PATH = "db/records.yml"
-  PLAY_COOKIE = "play_story"
-
-  attr_reader :request, :controller
-
+module Application
   def self.call(env)
-    new(env).route.finish
+    request = Rack::Request.new(env)
+    controller = ApplicationController.new(request)
+    route(request, controller)
   end
 
-  def initialize(env)
-    @request = Rack::Request.new(env)
-    @controller = ApplicationController.new(request)
-  end
+  private
 
-  def route
-    case @request.path
+  def self.route(request, controller)
+    case request.path
     when "/"            then controller.index_page
     when "/start_game"  then controller.start_game
     when "/play"        then controller.play_page
