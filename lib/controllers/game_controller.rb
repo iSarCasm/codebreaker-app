@@ -23,13 +23,8 @@ class GameController < ApplicationController
     rescue ArgumentError => e
       session[:error] = "You have to input chars in range 1-#{game.symbols_range.to_s(16)}"
     ensure
-      if game.state == :playing
-        redirect '/play'
-      else
-        redirect '/result'
-      end
+      redirect (game.state == :playing ? '/play' : '/result')
     end
-
   end
 
   def get_hint
