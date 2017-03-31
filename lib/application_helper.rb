@@ -1,20 +1,4 @@
 module ApplicationHelper
-  def game
-    @request.session[:game]
-  end
-
-  def respond
-    @request.session[:respond]
-  end
-
-  def hint
-    @request.session[:hint]
-  end
-
-  def error
-    @request.session[:error]
-  end
-
   def formated_respond
     '+ ' * respond[0] + '- ' * respond[1]
   end

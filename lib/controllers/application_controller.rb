@@ -1,23 +1,24 @@
 class ApplicationController < Controller::Base
   DB_PATH = "db/records.yml"
-  PLAY_COOKIE = "play_story"
 
-  def clear_game_cookies(response)
-    request.session[PLAY_COOKIE] = nil
+  def game
+    session[:game]
   end
 
-  def add_play_cookie(response, add)
-    if @request.session[PLAY_COOKIE]
-      history = request.session[PLAY_COOKIE]
-      history << add
-    else
-      history = [add]
-    end
-    request.session[PLAY_COOKIE] = history
+  def respond
+    session[:respond]
   end
 
-  def play_cookies
-    request.session[PLAY_COOKIE] if request.session[PLAY_COOKIE]
+  def hint
+    session[:hint]
+  end
+
+  def error
+    session[:error]
+  end
+
+  def play_history
+    session[:play_history]
   end
 
   def leaderboards

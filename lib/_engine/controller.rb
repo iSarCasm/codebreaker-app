@@ -21,5 +21,13 @@ module Controller
       path = File.expand_path("../../views/#{template}", __FILE__)
       response.body << ERB.new(File.read(path)).result(binding)
     end
+
+    def session
+      request.session
+    end
+
+    def redirect where
+      response.redirect where
+    end
   end
 end
