@@ -9,8 +9,8 @@ class GameController < ApplicationController
   end
 
   def play_page
-    session[:error] = nil
     render("play.html.erb")
+    session[:error] = nil
   end
 
   def guess
