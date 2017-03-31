@@ -4,7 +4,7 @@ class GameController < ApplicationController
   def start_game
     session.clear
     session[:game] = Codebreaker::Game.new
-    session[:game].start(@request.params["diff"].to_sym)
+    session[:game].start(params["diff"].to_sym)
     redirect '/play'
   end
 
@@ -14,10 +14,10 @@ class GameController < ApplicationController
   end
 
   def guess
-    code = @request.params["code"].split("").map{|x| x.to_i(16)}
+    code = params["code"].split("").map{|x| x.to_i(16)}
     begin
       session[:respond] = game.guess(code)
-      append_play_history([game.attempts_taken, @request.params["code"], formated_respond])
+      append_play_history([game.attempts_taken, params["code"], formated_respond])
     rescue IndexError => e
       session[:error] = "You have to input #{game.symbols_count} chars."
     rescue ArgumentError => e
@@ -42,7 +42,7 @@ class GameController < ApplicationController
 
   def save_record
     db = File.open(DB_PATH, 'a+')
-    loaded = [@request.params["name"], game.score]
+    loaded = [params["name"], game.score]
     db.write(loaded.to_yaml)
     db.close
     redirect '/'

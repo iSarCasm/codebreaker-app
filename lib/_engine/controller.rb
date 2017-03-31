@@ -21,6 +21,10 @@ module Controller
       request.session
     end
 
+    def params
+      request.params
+    end
+
     def render(template)
       path = File.expand_path("../../views/#{template}", __FILE__)
       response.body << ERB.new(File.read(path)).result(binding)
