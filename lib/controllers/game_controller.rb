@@ -1,14 +1,5 @@
-class ApplicationController
+class GameController < ApplicationController::Base
   include ApplicationHelper
-
-  def initialize(request)
-    @request = request
-  end
-
-  def index_page
-    puts DB_PATH
-    Rack::Response.new(render("index.html.erb"))
-  end
 
   def start_game
     Rack::Response.new do |response|
