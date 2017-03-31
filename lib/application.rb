@@ -6,6 +6,7 @@ require 'pry'
 
 require_relative '_engine/exceptions/routing_error'
 require_relative '_engine/route'
+require_relative '_engine/router'
 require_relative '_engine/controller'
 
 require_relative 'application_router'

@@ -1,18 +1,4 @@
-class ApplicationRouter
-  attr_reader :request, :response, :controller
-
-  def initialize(request:, controller:)
-    @request    = request
-    @response   = response
-    @controller = controller
-  end
-
-  def respond
-    controller.call route: Route.new(route), request: request
-  rescue RoutingError => e
-    Rack::Response.new("Not Found", 404)
-  end
-
+class ApplicationRouter < Router
   def routes
     {
       "/"            => 'static_pages#home',
@@ -25,13 +11,7 @@ class ApplicationRouter
     }
   end
 
-  private
-
-  def route
-    if routes.include? request.path
-      routes[request.path]
-    else
-      fail RoutingError
-    end
+  def not_found
+    Rack::Response.new("Not Found", 404)
   end
 end
