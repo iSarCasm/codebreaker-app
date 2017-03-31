@@ -1,11 +1,11 @@
 module Controller
   def self.call(route:, request:)
     Rack::Response.new do |response|
-      invoke(route, request, response)
+      run_action_for_controller(route, request, response)
     end
   end
 
-  def self.invoke(route, request, response)
+  def self.run_action_for_controller(route, request, response)
     Object.const_get(route.controller_name).new(request, response).send(route.action)
   end
 
