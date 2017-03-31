@@ -9,4 +9,10 @@ RSpec.describe "pages accessibility", type: :feature do
     expect(page).to have_button 'Play'
     expect(page).to have_selector '#game-description'
   end
+
+  it "unexisting page" do
+    visit '/asdfsdfjdsfjsdfsdl'
+
+    expect(page.status_code).to eq(404)
+  end
 end

@@ -7,15 +7,21 @@ class ApplicationRouter
   end
 
   def route
+    controller.send(get_controller_action)
+  rescue RoutingError => e
+    Rack::Response.new("Not Found", 404)
+  end
+
+  def get_controller_action
     case request.path
-    when "/"            then controller.index_page
-    when "/start_game"  then controller.start_game
-    when "/play"        then controller.play_page
-    when "/guess"       then controller.guess
-    when "/hint"        then controller.get_hint
-    when "/result"      then controller.result_page
-    when "/record"      then controller.save_record
-    else Rack::Response.new("Not Found", 404)
+    when "/"            then :index_page
+    when "/start_game"  then :start_game
+    when "/play"        then :play_page
+    when "/guess"       then :guess
+    when "/hint"        then :get_hint
+    when "/result"      then :result_page
+    when "/record"      then :save_record
+    else fail RoutingError
     end
   end
 end

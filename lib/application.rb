@@ -4,6 +4,7 @@ require 'codebreaker'
 require  'yaml'
 require 'pry'
 
+require_relative 'exceptions/routing_error'
 require_relative 'application_router'
 require_relative 'application_helper'
 require_relative 'application_controller'
