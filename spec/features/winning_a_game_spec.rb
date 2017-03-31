@@ -11,27 +11,12 @@ RSpec.describe 'winning a game', type: :feature, js: true do
     submit_code find_out_correct_code
   end
 
-  it "redirects to '/result'" do
+  it 'shows correct Victory page' do
     expect(current_path).to eq '/result'
-  end
-
-  it 'indicates that player has won' do
     expect(page).to have_content('Victory!')
-  end
-
-  it 'shows player score' do
     expect(page).to have_content('Your score:')
-  end
-
-  it 'shows leaderboard place' do
     expect(page.text).to match /You actually took \d+ place in leaderboards/
-  end
-
-  it 'shows Submit button' do
     expect(page).to have_button('Submit')
-  end
-
-  it 'shows Skip button' do
     expect(page).to have_link('Skip')
   end
 
@@ -40,11 +25,8 @@ RSpec.describe 'winning a game', type: :feature, js: true do
       click_button 'Submit'
     end
 
-    it "redirects to '/'" do
+    it "Redirects to home and updates Leaderboards" do
       expect(current_path).to eq '/'
-    end
-
-    it 'updates leaderboard' do
       expect(@leaderboards).to_not eql get_leaderboards
     end
   end
@@ -54,11 +36,8 @@ RSpec.describe 'winning a game', type: :feature, js: true do
       click_link 'Skip'
     end
 
-    it "redirects to '/'" do
+    it "Redirects to Home and does not pdate Leaderboards" do
       expect(current_path).to eq '/'
-    end
-
-    it "doesn't update leaderboard" do
       expect(@leaderboards).to eql get_leaderboards
     end
   end

@@ -17,6 +17,10 @@ RSpec.describe 'playing a game', type: :feature, js: true do
    end
 
    context 'when guess is using wrong chars' do
+     before do
+       fill_in 'code', with: 'xyz'
+     end
+
      it "doesn't count as an attempt" do
        expect{ click_button 'Submit' }.to_not change{ attempts_left }
      end

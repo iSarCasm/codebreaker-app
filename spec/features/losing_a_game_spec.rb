@@ -11,15 +11,9 @@ RSpec.describe 'losing a game', type: :feature, js: true do
     10.times { submit_code(wrong_code) }
   end
 
-  it "redirects to '/result'" do
+  it "shows a loss page" do
     expect(current_path).to eq '/result'
-  end
-
-  it 'indicates that player has lost' do
     expect(page).to have_content('Defeat!')
-  end
-
-  it 'shows Go Home link' do
     expect(page).to have_link('Go Home..')
   end
 end
