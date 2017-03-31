@@ -8,7 +8,7 @@ require_relative 'fixtures/codebreaker_page_dsl'
 ENV['RACK_ENV'] = 'test'
 TEST_ENV = Hash.new
 
-module ApplicationHelper
+class ApplicationController
   DB_PATH = File.expand_path("../fixtures/#{DB_PATH}", __FILE__)
 end
 

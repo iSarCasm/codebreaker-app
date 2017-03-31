@@ -6,15 +6,11 @@ class Route
     @action     = route.split('#').last
   end
 
-  def invoke(request)
-    Object.const_get(controller_name).new(request).send(action)
-  end
-
-  private
-
   def controller_name
     "#{capitalize(controller)}Controller"
   end
+
+  private
 
   def capitalize(string)
     string.split('_').map do |c|

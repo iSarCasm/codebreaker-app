@@ -1,7 +1,7 @@
-class StaticPagesController < ApplicationController::Base
+class StaticPagesController < ApplicationController
   include ApplicationHelper
 
   def home
-    Rack::Response.new(render("index.html.erb"))
+    render("index.html.erb")
   end
 end
