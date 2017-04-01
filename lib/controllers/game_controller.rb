@@ -17,7 +17,7 @@ class GameController < ApplicationController
     code = @request.params["code"].split("").map{|x| x.to_i(16)}
     begin
       session[:respond] = game.guess(code)
-      append_play_history([game.attempts_taken, @request.params["code"], formated_respond])
+      GuessAttempt.create(number: game.attempts_taken, type: params["code"], response: respond)
     rescue IndexError => e
       session[:error] = "You have to input #{game.symbols_count} chars."
     rescue ArgumentError => e
@@ -29,7 +29,7 @@ class GameController < ApplicationController
 
   def get_hint
     session[:hint] = game.hint
-    append_play_history(['HINT', 'HINT', formated_hint])
+    HintAttempt.create(respond)
   rescue Exception => e
     session[:error] = e.message
   ensure
@@ -46,12 +46,5 @@ class GameController < ApplicationController
     db.write(loaded.to_yaml)
     db.close
     redirect '/'
-  end
-
-  private
-
-  def append_play_history(add)
-    history = (request.session[:play_history] || []) << add
-    session[:play_history] = history
   end
 end

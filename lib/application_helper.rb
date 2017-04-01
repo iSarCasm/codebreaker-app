@@ -1,12 +1,4 @@
 module ApplicationHelper
-  def formated_respond
-    '+ ' * respond[0] + '- ' * respond[1]
-  end
-
-  def formated_hint
-    hint.map{|x| x || '*'}
-  end
-
   def place
     table = leaderboards
     place = 1
