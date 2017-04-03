@@ -1,9 +1,8 @@
 class Router
-  attr_reader :request, :response, :controller
+  attr_reader :request, :controller
 
   def initialize(request:, controller:)
     @request    = request
-    @response   = response
     @controller = controller
   end
 
