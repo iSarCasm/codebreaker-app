@@ -15,7 +15,7 @@ class GameController < ApplicationController
   def guess
     game = Game.get
     begin
-      session[:respond] = game.guess(params['code'])
+      respond = game.guess(params['code'])
       GuessAttempt.create(number: game.attempts_taken, type: params['code'], response: respond)
     rescue IndexError => e
       session[:error] = "You have to input #{game.symbols_count} chars."
