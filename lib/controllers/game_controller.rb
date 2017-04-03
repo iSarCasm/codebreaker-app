@@ -4,7 +4,7 @@ class GameController < ApplicationController
   def start_game
     session.clear
     session[:game] = Codebreaker::Game.new
-    session[:game].start(@request.params["diff"].to_sym)
+    session[:game].start(params["diff"].to_sym)
     redirect '/play'
   end
 
@@ -14,7 +14,7 @@ class GameController < ApplicationController
   end
 
   def guess
-    code = @request.params["code"].split("").map{|x| x.to_i(16)}
+    code = params["code"].split("").map{|x| x.to_i(16)}
     begin
       session[:respond] = game.guess(code)
       GuessAttempt.create(number: game.attempts_taken, type: params["code"], response: respond)
@@ -41,10 +41,7 @@ class GameController < ApplicationController
   end
 
   def save_record
-    db = File.open(DB_PATH, 'a+')
-    loaded = [@request.params["name"], game.score]
-    db.write(loaded.to_yaml)
-    db.close
+    LeaderboardRecord.create(name: params["name"], score: game.score)
     redirect '/'
   end
 end
