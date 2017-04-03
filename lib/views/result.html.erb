@@ -24,7 +24,7 @@
     </nav>
 
     <section class="result">
-      <% if game.won? %>
+      <% if @game.won? %>
         <div class="container">
           <div class="row">
             <div class="col-sm-4 col-sm-offset-4">
@@ -32,7 +32,7 @@
                 <h3>Victory!</h3>
                 <img width="300" src="images/win.jpg" alt="win">
               </center>
-              <p class="score">Your score: <%= game.score %></p>
+              <p class="score">Your score: <%= @game.score %></p>
               <p class="place bg-info">You actually took <span class="bold"><%= @new_record.place %></span> place in leaderboards</p>
               <form action="/record" class="">
                 <div class="form-group">
@@ -45,7 +45,7 @@
             </div>
           </div>
         </div>
-      <% elsif game.lost? %>
+      <% elsif @game.lost? %>
       <div class="lost">
         <div class="container">
           <div class="row">
@@ -53,7 +53,7 @@
               <center>
                 <h3>Defeat!</h3>
                 <img src="images/lose.jpg" alt="Lose"> <br> <br>
-                <p>The code was: <%= game.secret %></p>
+                <p>The code was: <%= @game.secret %></p>
                 <a href="/" class="btn btn-default">Go Home..</a>
               </center>
             </div>
