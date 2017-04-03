@@ -1,4 +1,4 @@
-class SessionStorage
+class FileStorage < Storage
   def self.all
     database = File.open(storage_path)
     YAML.load_stream(database) || []

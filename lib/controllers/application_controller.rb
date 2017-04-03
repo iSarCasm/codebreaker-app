@@ -7,19 +7,7 @@ class ApplicationController < Controller::Base
     session[:respond]
   end
 
-  def hint
-    session[:hint]
-  end
-
   def error
     session[:error]
-  end
-
-  def play_history
-    session[:play_history]
-  end
-
-  def leaderboards
-    LeaderboardRecord.all
   end
 end

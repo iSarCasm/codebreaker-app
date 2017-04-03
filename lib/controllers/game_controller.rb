@@ -1,6 +1,4 @@
 class GameController < ApplicationController
-  include ApplicationHelper
-
   def start_game
     session.clear
     session[:game] = Codebreaker::Game.new
@@ -9,6 +7,7 @@ class GameController < ApplicationController
   end
 
   def play_page
+    @attempts = Attempt.all
     render("play.html.erb")
     session[:error] = nil
   end
@@ -28,8 +27,7 @@ class GameController < ApplicationController
   end
 
   def get_hint
-    session[:hint] = game.hint
-    HintAttempt.create(respond)
+    HintAttempt.create(game.hint)
   rescue Exception => e
     session[:error] = e.message
   ensure
@@ -37,6 +35,7 @@ class GameController < ApplicationController
   end
 
   def result_page
+    @new_record = LeaderboardRecord.new(name: '', score: game.score)
     render("result.html.erb")
   end
 

@@ -94,25 +94,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% if play_history %>
-                    <% play_history.reverse.each.with_index do |x, i| %>
+                  <% unless @attempts.empty? %>
+                    <% @attempts.reverse.each.with_index do |attempt, i| %>
                       <% if i.zero? %>
                         <tr>
                           <td id="last_attempt">
-                            <strong> <%= x[0] %>. </strong>
+                            <strong> <%= attempt.number %>. </strong>
                           </td>
                           <td id="last_code">
-                            <strong> <%= x[1] %> </strong>
+                            <strong> <%= attempt.type %> </strong>
                           </td>
                           <td id="last_response">
-                            <strong> <%= x[2] %> </strong>
+                            <strong> <%= attempt.response %> </strong>
                           </td>
                         </tr>
                       <% else %>
                       <tr>
-                        <td><%= x[0] %>.</td>
-                        <td><%= x[1] %></td>
-                        <td><%= x[2] %></td>
+                        <td><%= attempt.number %>.</td>
+                        <td><%= attempt.type %></td>
+                        <td><%= attempt.response %></td>
                       </tr>
                       <% end %>
                     <% end %>

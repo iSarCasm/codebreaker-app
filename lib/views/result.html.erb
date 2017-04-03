@@ -33,7 +33,7 @@
                 <img width="300" src="images/win.jpg" alt="win">
               </center>
               <p class="score">Your score: <%= game.score %></p>
-              <p class="place bg-info">You actually took <span class="bold"><%= place %></span> place in leaderboards</p>
+              <p class="place bg-info">You actually took <span class="bold"><%= @new_record.place %></span> place in leaderboards</p>
               <form action="/record" class="">
                 <div class="form-group">
                   <label for="name">Nickname: </label>

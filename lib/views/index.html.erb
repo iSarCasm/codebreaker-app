@@ -85,11 +85,11 @@
               </tr>
             </thead>
             <tbody>
-              <% leaderboards.each do |x| %>
+              <% @records.each do |record| %>
                 <tr>
-                  <td><%= x[0] %>.</td>
-                  <td><%= x[1] %></td>
-                  <td><%= x[2] %></td>
+                  <td><%= record.place %>.</td>
+                  <td><%= record.name %></td>
+                  <td><%= record.score %></td>
                 </tr>
               <% end %>
             </tbody>
