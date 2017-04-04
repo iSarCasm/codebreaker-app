@@ -32,12 +32,12 @@
                 <h3>Victory!</h3>
                 <img width="300" src="images/win.jpg" alt="win">
               </center>
-              <p class="score">Your score: <%= @game.score %></p>
+              <p class="score">Your score: <%= @new_record.score %></p>
               <p class="place bg-info">You actually took <span class="bold"><%= @new_record.place %></span> place in leaderboards</p>
               <form action="/record" class="">
                 <div class="form-group">
                   <label for="name">Nickname: </label>
-                  <input type="text" id="name" name="name" class="form-control">
+                  <input type="text" id="name" name="name" value="<%= @new_record.name %>" class="form-control">
                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a href="/" class="btn btn-default">Skip</a>

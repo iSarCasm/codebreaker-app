@@ -36,7 +36,7 @@ class GameController < ApplicationController
 
   def result_page
     @game = Game.get
-    @new_record = LeaderboardRecord.new(name: '', score: Game.get.score)
+    @new_record = LeaderboardRecord.new(score: Game.get.score)
     render("result.html.erb")
   end
 

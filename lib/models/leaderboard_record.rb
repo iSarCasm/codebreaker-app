@@ -11,7 +11,7 @@ class LeaderboardRecord < FileStorage
     end
   end
 
-  def initialize(name: , score:)
+  def initialize(name: 'Guest', score:)
     @name   = name
     @score  = score
   end
