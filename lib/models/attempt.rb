@@ -5,8 +5,8 @@ class Attempt < SessionStorage
     :play_history
   end
 
-  def initialize(number:, type:, response:)
-    @number   = number
+  def initialize(type:, response:)
+    @number   = Game.get.attempts_taken
     @type     = type
     @response = response
   end

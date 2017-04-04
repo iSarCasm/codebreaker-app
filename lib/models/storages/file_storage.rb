@@ -12,5 +12,6 @@ class FileStorage < Storage
     database = File.open(storage_path, 'a+')
     database.write(self.to_yaml)
     database.close
+    self
   end
 end

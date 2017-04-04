@@ -13,24 +13,16 @@ class GameController < ApplicationController
   end
 
   def guess
-    game = Game.get
-    begin
-      respond = game.guess(params['code'])
-      GuessAttempt.create(number: game.attempts_taken, type: params['code'], response: respond)
-    rescue IndexError => e
-      Error.create "You have to input #{game.symbols_count} chars."
-    rescue ArgumentError => e
-      Error.create "You have to input chars in range 1-#{game.symbols_range.to_s(16)}"
-    ensure
-      redirect game.current_page
+    respond = Game.get.guess(params['code'])
+    unless respond.kind_of? Error
+      GuessAttempt.create(type: params['code'], response: respond)
     end
+    redirect Game.get.current_page
   end
 
   def get_hint
-    HintAttempt.create(Game.get.hint)
-  rescue Exception => e
-    Error.create e.message
-  ensure
+    hint = Game.get.hint
+    HintAttempt.create(hint) unless hint.kind_of? Error 
     redirect '/play'
   end
 

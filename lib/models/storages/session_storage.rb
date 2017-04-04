@@ -9,6 +9,7 @@ class SessionStorage < Storage
 
   def add
     session[storage_path] = all << self
+    self
   end
 
   def self.session

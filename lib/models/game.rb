@@ -14,6 +14,16 @@ class Game < SessionStorage
   def guess(code)
     code = code.split('').map { |x| x.to_i(16) }
     codebreaker_game.guess(code)
+  rescue IndexError => e
+    Error.create "You have to input #{symbols_count} chars."
+  rescue ArgumentError => e
+    Error.create "You have to input chars in range 1-#{symbols_range.to_s(16)}"
+  end
+
+  def hint
+    codebreaker_game.hint
+  rescue Exception => e
+    Error.create e.message
   end
 
   def current_page
