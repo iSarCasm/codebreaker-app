@@ -6,10 +6,16 @@ class LeaderboardRecord < FileStorage
   end
 
   def self.all
-    super.sort do |a1, a2|
+    @@all ||= super.sort do |a1, a2|
       a2.score <=> a1.score
     end
   end
+
+  def save
+    @@all = nil
+    super
+  end
+
 
   def initialize(name: 'Guest', score:)
     @name   = name
@@ -17,12 +23,12 @@ class LeaderboardRecord < FileStorage
   end
 
   def place
-    if all.empty?
-      return 1
-    else
-      all.each.with_index do |record, place|
-        return place+1 if score >= record.score
-      end
+    place = 1
+    all.each.with_index do |record, record_place|
+      return record_place + 1 if self == record
+      return place if score > record.score
+      place += 1
     end
+    place
   end
 end
