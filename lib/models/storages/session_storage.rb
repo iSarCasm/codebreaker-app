@@ -7,7 +7,7 @@ class SessionStorage < Storage
     session[storage_path] = nil
   end
 
-  def save
+  def add
     session[storage_path] = all << self
   end
 

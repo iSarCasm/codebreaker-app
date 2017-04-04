@@ -1,6 +1,6 @@
 class Storage
   def self.create(*args, &block)
-    new(*args, &block).save
+    new(*args, &block).add
   end
 
   def storage_path

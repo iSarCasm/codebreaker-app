@@ -11,7 +11,7 @@ class LeaderboardRecord < FileStorage
     end
   end
 
-  def save
+  def add
     @@all = nil
     super
   end

@@ -8,7 +8,7 @@ class FileStorage < Storage
     File.truncate(storage_path, 0)
   end
 
-  def save
+  def add
     database = File.open(storage_path, 'a+')
     database.write(self.to_yaml)
     database.close
