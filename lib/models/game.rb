@@ -1,5 +1,5 @@
 class Game < SessionStorage
-  extend SingleStorageUnit
+  extend SingleUnitStorage
   attr_reader :codebreaker_game
 
   def self.storage_path

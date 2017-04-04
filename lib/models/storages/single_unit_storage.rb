@@ -1,4 +1,4 @@
-module SingleStorageUnit
+module SingleUnitStorage
   def get
     all.first
   end

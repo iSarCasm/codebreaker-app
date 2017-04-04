@@ -8,8 +8,8 @@ class GameController < ApplicationController
   def play_page
     @attempts = Attempt.all
     @game = Game.get
+    @error = Error.get
     render("play.html.erb")
-    session[:error] = nil
   end
 
   def guess
@@ -18,9 +18,9 @@ class GameController < ApplicationController
       respond = game.guess(params['code'])
       GuessAttempt.create(number: game.attempts_taken, type: params['code'], response: respond)
     rescue IndexError => e
-      session[:error] = "You have to input #{game.symbols_count} chars."
+      Error.create "You have to input #{game.symbols_count} chars."
     rescue ArgumentError => e
-      session[:error] = "You have to input chars in range 1-#{game.symbols_range.to_s(16)}"
+      Error.create "You have to input chars in range 1-#{game.symbols_range.to_s(16)}"
     ensure
       redirect game.current_page
     end
@@ -29,7 +29,7 @@ class GameController < ApplicationController
   def get_hint
     HintAttempt.create(Game.get.hint)
   rescue Exception => e
-    session[:error] = e.message
+    Error.create e.message
   ensure
     redirect '/play'
   end

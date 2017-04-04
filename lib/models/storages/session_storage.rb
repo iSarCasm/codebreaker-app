@@ -3,6 +3,10 @@ class SessionStorage < Storage
     session[storage_path]  || []
   end
 
+  def self.clear
+    session[storage_path] = nil
+  end
+
   def save
     session[storage_path] = all << self
   end
