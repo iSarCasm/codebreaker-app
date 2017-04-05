@@ -25,17 +25,21 @@ module Controller
       request.params
     end
 
+    def render(template)
+      rendered =  render_layout do
+                    render_partial(template)
+                  end
+      response.body << rendered
+    end
+
+    def render_partial(partial)
+      partial_path = File.expand_path("../../views/#{partial}", __FILE__)
+      ERB.new(File.read(partial_path)).result(binding)
+    end
+
     def render_layout(layout: 'application.html.erb')
       layout_path = File.expand_path("../../views/#{layout}", __FILE__)
       ERB.new(File.read(layout_path)).result(binding)
-    end
-
-    def render(template)
-      template_path = File.expand_path("../../views/#{template}", __FILE__)
-      rendered =  render_layout do
-                    ERB.new(File.read(template_path)).result(binding)
-                  end
-      response.body << rendered
     end
 
     def redirect where
