@@ -9,7 +9,7 @@ class GameController < ApplicationController
     @attempts = Attempt.all
     @game = Game.get
     @error = Error.get
-    render("play.html.erb")
+    render 'play'
   end
 
   def guess
@@ -22,14 +22,14 @@ class GameController < ApplicationController
 
   def get_hint
     hint = Game.get.hint
-    HintAttempt.create(hint) unless hint.kind_of? Error 
+    HintAttempt.create(hint) unless hint.kind_of? Error
     redirect '/play'
   end
 
   def result_page
     @game = Game.get
     @new_record = LeaderboardRecord.new(score: Game.get.score)
-    render("result.html.erb")
+    render 'result'
   end
 
   def save_record

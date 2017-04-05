@@ -33,12 +33,12 @@ module Controller
     end
 
     def render_partial(partial)
-      partial_path = File.expand_path("../../views/#{partial}", __FILE__)
+      partial_path = File.expand_path("../../views/#{partial}.html.erb", __FILE__)
       ERB.new(File.read(partial_path)).result(binding)
     end
 
-    def render_layout(layout: 'application.html.erb')
-      layout_path = File.expand_path("../../views/#{layout}", __FILE__)
+    def render_layout(layout: 'application')
+      layout_path = File.expand_path("../../views/#{layout}.html.erb", __FILE__)
       ERB.new(File.read(layout_path)).result(binding)
     end
 
