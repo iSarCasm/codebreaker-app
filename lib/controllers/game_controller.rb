@@ -1,11 +1,11 @@
 class GameController < ApplicationController
-  def start_game
+  def start
     session.clear
     Game.create(difficulty: params['diff'])
     redirect '/play'
   end
 
-  def play_page
+  def play
     @attempts = Attempt.all
     @game = Game.get
     @error = Error.get
@@ -20,13 +20,13 @@ class GameController < ApplicationController
     redirect Game.get.current_page
   end
 
-  def get_hint
+  def hint
     hint = Game.get.hint
     HintAttempt.create(hint) unless hint.kind_of? Error
     redirect '/play'
   end
 
-  def result_page
+  def result
     @game = Game.get
     @new_record = LeaderboardRecord.new(score: Game.get.score)
     render 'result'

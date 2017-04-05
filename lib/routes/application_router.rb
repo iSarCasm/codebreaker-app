@@ -2,11 +2,11 @@ class ApplicationRouter < Router
   def routes
     {
       "/"            => 'static_pages#home',
-      "/start_game"  => 'game#start_game',
-      "/play"        => 'game#play_page',
+      "/start_game"  => 'game#start',
+      "/play"        => 'game#play',
       "/guess"       => 'game#guess',
-      "/hint"        => 'game#get_hint',
-      "/result"      => 'game#result_page',
+      "/hint"        => 'game#hint',
+      "/result"      => 'game#result',
       "/record"      => 'game#save_record'
     }
   end
